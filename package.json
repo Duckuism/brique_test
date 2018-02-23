@@ -1,0 +1,27 @@
+{
+  "name": "Brique_test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "FIRST TEST_2.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YouDuk/brique_test.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YouDuk/brique_test/issues"
+  },
+  "homepage": "https://github.com/YouDuk/brique_test#readme",
+  "dependencies": {
+    "express": "4.16.2",
+    "socket.io": "2.0.4",
+    "websocket": "^1.0.25",
+    "ws": "^4.1.0"
+  }
+}

@@ -15,7 +15,7 @@ function Problem1(number){
 		if(i%15==0){ // 3과 5의 공배수가 나오면 	
 			for(var j = pastPublicMultiple; j<i; j++){ //지난 공배수부터 현재 공배수 전까지 반복
 				if(j%3 == 0 || j%5 == 0){
-					console.log(j);
+					// console.log(j);
 					result += j ;
 				}	
 			}

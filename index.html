@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Brique FIRST TEST_1</title>
+	<script
+	  src="http://code.jquery.com/jquery-3.3.1.js"
+	  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+	  crossorigin="anonymous"></script>
+	<style>
+		#sender{
+			border:1px solid black;
+			width: 100px;
+			height: 100px;
+			margin-left:5px;
+			margin-right:5px;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-around;
+			align-content: center;			
+		}
+
+		#sender_title{
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		#sender_content{
+			display: flex;
+			justify-content: center;
+			align-items: center;		
+		}		
+
+		#receiver{
+			border:1px solid black;
+			width: 100px;
+			height: 100px;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-around;
+			align-items: center;
+			margin-left:5px;
+			margin-right:5px;									
+		}
+
+		#receiver_title{
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		#receiver_content{
+			display: flex;
+			justify-content: center;
+			align-items: center;		
+		}	
+
+		.transmit{
+			display: flex;
+			justify-content: center;
+		}
+	</style>
+
+</head>
+<body>	
+	<div class="transmit">
+		<form action="#" id="sender">
+			<div id="sender_title">Form1</div>
+			<div id="sender_content"><button id="sender_button">Send</button></div>
+		</form>
+		<form action="#" id="receiver">
+			<div id="receiver_title">Form2</div>
+			<div id="receiver_content"></div>
+		</form>
+	</div>
+<script>
+
+	//웹소켓 전역 객체 생성
+	var ws = new WebSocket("ws://localhost:3000");
+
+	//연결이 수립되면 서버에 메시지를 전송
+	ws.onopen = function(event){
+		ws.send("ws message: connected");
+	}	
+
+	//서버로부터 메세지를 수신한다.
+	ws.onmessage = function(event){
+		console.log("Server message: ", event.data);
+	}
+
+	//error event handler
+	ws.onerror = function(event){
+		console.log("Server error message: ", event.data);
+	}
+
+	//button 클릭 시 서버로 "Hello" 전송 후 다시 받는다.
+	$("#sender_button").on("click",function(){
+		ws.send("Hello");
+		ws.onmessage = function(event){
+			console.log(event.data);
+			$("#receiver_content").text(event.data);
+		}
+		ws.onerror = function(event){
+			console.log("Server error message: ", event.data);
+		}		
+	})
+
+</script>
+</body>
+</html>
